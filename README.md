@@ -3,3 +3,6 @@ This repo contains a WIP config for [kanata](https://github.com/jtroo/kanata) th
 
 tap-dance-eager is not available in the current version of kanata yet, so I've
 added a binary to the repo for now.
+
+The current config imitates the behavior of keys 0-9 on KaiOS. The other buttons
+aren't mapped yet.
