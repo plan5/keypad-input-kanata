@@ -1,0 +1,109 @@
+;; This minimal config changes Caps Lock to act as Caps Lock on quick tap, but
+;; if held, it will act as Left Ctrl. It also changes the backtick/grave key to
+;; act as backtick/grave on quick tap, but change ijkl keys to arrow keys on hold.
+
+;; Exactly one defcfg entry is required. This is used for configuration key-pairs.
+(defcfg
+  ;; Your keyboard device will likely differ from this.
+  linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
+
+  ;; Windows doesn't need any input/output configuration entries; however, there
+  ;; must still be a defcfg entry. You can keep the linux-dev entry or delete
+  ;; it and leave it empty.
+)
+
+(defsrc
+  1 2 3
+  4 5 6
+  7 8 9
+    0
+)
+
+(deflayer default
+  @td1 @td2 @td3
+  @td4 @td5 @td6
+  @td7 @td8 @td9
+       @td0
+)
+
+(defalias
+  0 0
+  1 1
+  2 2
+  3 3
+  4 4
+  5 5
+  6 6
+  7 7
+  8 8
+  9 9
+  td1 (tap-dance-eager 500 (
+    (macro .) ;; use macro to prevent auto-repeat of the key
+    (macro bspc ,)
+    (macro bspc S-/)
+    (macro bspc S-1)
+    (macro bspc @1)
+    (macro bspc ;)
+    (macro bspc S-;)
+    (macro bspc /)
+    (macro bspc S-2)
+  ))
+  td2 (tap-dance-eager 500 (
+    (macro a) ;; use macro to prevent auto-repeat of the key
+    (macro bspc b)
+    (macro bspc c)
+    (macro bspc @2)
+  ))
+  td3 (tap-dance-eager 500 (
+    (macro d) ;; use macro to prevent auto-repeat of the key
+    (macro bspc e)
+    (macro bspc f)
+    (macro bspc @3)
+  ))
+  td4 (tap-dance-eager 500 (
+    (macro g) ;; use macro to prevent auto-repeat of the key
+    (macro bspc h)
+    (macro bspc i)
+    (macro bspc @4)
+  ))
+  td5 (tap-dance-eager 500 (
+    (macro j) ;; use macro to prevent auto-repeat of the key
+    (macro bspc k)
+    (macro bspc l)
+    (macro bspc @5)
+  ))
+  td6 (tap-dance-eager 500 (
+    (macro m) ;; use macro to prevent auto-repeat of the key
+    (macro bspc n)
+    (macro bspc o)
+    (macro bspc @6)
+  ))
+  td7 (tap-dance-eager 500 (
+    (macro p) ;; use macro to prevent auto-repeat of the key
+    (macro bspc q)
+    (macro bspc r)
+    (macro bspc s)
+    (macro bspc @7)
+  ))
+  td8 (tap-dance-eager 500 (
+    (macro t) ;; use macro to prevent auto-repeat of the key
+    (macro bspc u)
+    (macro bspc v)
+    (macro bspc @8)
+  ))
+  td9 (tap-dance-eager 500 (
+    (macro w) ;; use macro to prevent auto-repeat of the key
+    (macro bspc x)
+    (macro bspc y)
+    (macro bspc z)
+    (macro bspc @9)
+  ))
+  td0 (tap-dance-eager 500 (
+    (macro spc) ;; use macro to prevent auto-repeat of the key
+    (macro bspc 0)
+    (macro bspc @0)
+  ))
+  ;;cap (tap-hold-press 200 200 caps lctl)
+  ;;grv (tap-hold-press 200 200 grv (layer-toggle arrows))
+)
+
