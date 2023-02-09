@@ -5,7 +5,7 @@
 ;; Exactly one defcfg entry is required. This is used for configuration key-pairs.
 (defcfg
   ;; Your keyboard device will likely differ from this.
-  linux-dev /dev/input/by-path/platform-gpio-keys-event
+  linux-dev /dev/input/by-path/platform-keypad-event-mouse
 
   ;; Windows doesn't need any input/output configuration entries; however, there
   ;; must still be a defcfg entry. You can keep the linux-dev entry or delete
