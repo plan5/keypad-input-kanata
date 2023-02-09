@@ -5,14 +5,31 @@
 ;; Exactly one defcfg entry is required. This is used for configuration key-pairs.
 (defcfg
   ;; Your keyboard device will likely differ from this.
-  linux-dev /dev/input/by-path/platform-keypad-event-mouse
+  ;; linux-dev platform-200f000.spmi-platform-200f000.spmi\:pmic@0\:pon@800\:pwrkey-event:platform-200f000.spmi-platform-200f000.spmi\:pmic@0\:pon@800\:resin-event:platform-gpio-keys-event:platform-keypad-event-mouse
+  linux-dev /dev/input/event0:/dev/input/event1:/dev/input/event2:/dev/input/event3:/dev/input/event4
+  ;; process-unmapped-keys yes
 
   ;; Windows doesn't need any input/output configuration entries; however, there
   ;; must still be a defcfg entry. You can keep the linux-dev entry or delete
   ;; it and leave it empty.
 )
 
+(deflocalkeys-linux
+  cdwn 108
+  ;;pho 445 ;;will crash when defined at the moment
+  bri 273
+  ble 272
+  kle 105
+  kri 106
+  pwr 116
+  sta 522
+  pou 523
+)
+
 (defsrc
+  ble  up   bri
+  kle ret   kri
+  cdwn bspc ;;pho is missing to the left because undefined
   1 2 3
   4 5 6
   7 8 9
@@ -20,11 +37,23 @@
 )
 
 (deflayer default
+  @ble  @up   @bri
+  @kle @ret   @kri
+  @cdwn @bspc ;;@pho is missing to the left because undefined
   @td1 @td2 @td3
   @td4 @td5 @td6
   @td7 @td8 @td9
        @td0
 )
+
+;;(deflayer numbers
+;;  1 2 3
+;;  4 5 6
+;;  7 8 9
+;;    0
+;;    ret
+;;    bright
+;;)
 
 (defalias
   0 0
@@ -37,6 +66,14 @@
   7 7
   8 8
   9 9
+  ble (macro .)
+  bri (macro .)
+  kle (macro .)
+  kri (macro .)
+  cdwn (macro .)
+  bspc (macro .)
+  up (macro .)
+  ret (macro M-r)
   td1 (tap-dance-eager 500 (
     (macro .) ;; use macro to prevent auto-repeat of the key
     (macro bspc ,)
