@@ -16,7 +16,7 @@
 
 (deflocalkeys-linux
   cdwn 108
-  ;;pho 445 ;;will crash when defined at the moment
+  pho 445 ;;will crash when defined at the moment
   bri 273
   ble 272
   kle 105
@@ -66,14 +66,14 @@
   7 7
   8 8
   9 9
-  ble (macro .)
+  ble (macro tab)
   bri (macro .)
   kle (macro .)
   kri (macro .)
-  cdwn (macro .)
-  bspc (macro .)
-  up (macro .)
-  ret (macro M-r)
+  cdwn (macro down)
+  bspc (tap-dance 100 (bspc esc))
+  up (macro up)
+  ret (tap-dance 200 (ret M-p))
   td1 (tap-dance-eager 500 (
     (macro .) ;; use macro to prevent auto-repeat of the key
     (macro bspc ,)
